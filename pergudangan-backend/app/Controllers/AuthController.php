@@ -30,7 +30,7 @@ class AuthController extends ResourceController
         $json = $this->request->getJSON();
         $data = [
             'username' => $json->username,
-            'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+            'password' => password_hash($json->password, PASSWORD_DEFAULT),
             'role' => $json->role
         ];
         // Simpan data ke database via UserModel
@@ -68,7 +68,6 @@ class AuthController extends ResourceController
                     'exp' => $expirationTime,
                     'data' => [
                         'username' => $username,
-                        'role' => $user['role']
                     ]
                 ];
     
@@ -77,7 +76,8 @@ class AuthController extends ResourceController
     
                 return $this->respond([
                     'message' => 'Login successful',
-                    'token' => $jwt
+                    'token' => $jwt,
+                    'role' => $user['role']
                 ]);
             } else {
                 return $this->failUnauthorized('Invalid password');

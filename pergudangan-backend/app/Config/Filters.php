@@ -36,6 +36,7 @@ class Filters extends BaseFilters
         'jwtAuth' => \App\Filters\JwtAuth::class,
         'cors'          => Cors::class,
         'options' => \App\Filters\Options::class,
+        'role' => \App\Filters\RoleFilter::class,
     ];
     
 

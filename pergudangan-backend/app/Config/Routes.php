@@ -18,24 +18,25 @@ $routes->group('api', ['namespace' => 'App\Controllers', 'filter' => 'jwtAuth'],
     //* Routes for Categories
     $routes->resource('categories', ['controller' => 'CategoriesController']);
     // $routes->get('categories', 'CategoriesController::index');
-    // $routes->post('categories', 'CategoriesController::create');
-    // $routes->put('categories/(:num)', 'CategoriesController::update/$1');
-    // $routes->delete('categories/(:num)', 'CategoriesController::delete/$1');
-
+    
     //* Routes for Suppliers
     $routes->resource('suppliers', ['controller' => 'SuppliersController']);
     // $routes->get('suppliers', 'SuppliersController::index');
     // $routes->get('suppliers/(:num)', 'SuppliersController::show/$1');
-    // $routes->post('suppliers', 'SuppliersController::create');
-    // $routes->put('suppliers/(:num)', 'SuppliersController::update/$1');
-    // $routes->delete('suppliers/(:num)', 'SuppliersController::delete/$1');
+    
+    $routes->group('', ['namespace' => 'App\Controllers', 'filter' => 'role:admin'], function ($routes) {
+        // $routes->post('categories', 'CategoriesController::create');
+        // $routes->put('categories/(:num)', 'CategoriesController::update/$1');
+        // $routes->delete('categories/(:num)', 'CategoriesController::delete/$1');
+        
+        // $routes->post('suppliers', 'SuppliersController::create');
+        // $routes->put('suppliers/(:num)', 'SuppliersController::update/$1');
+        // $routes->delete('suppliers/(:num)', 'SuppliersController::delete/$1');
+        
+    });
 
     //* Routes for Stocks
     // $routes->resource('stocks', ['controller' => 'StocksController']);
-    // $routes->get('stocks', 'StocksController::index');
-    // $routes->get('stocks/(:num)', 'StocksController::show/$1');
-    // $routes->post('stocks', 'StocksController::create');
-    // $routes->put('stocks/(:num)', 'StocksController::update/$1');
 
     //* Routes for Transactions
     $routes->resource('transactions', ['controller' => 'TransactionsController']);
