@@ -35,6 +35,10 @@ class JwtAuth implements FilterInterface
 
             // Simpan data user ke request agar bisa digunakan di controller
             $request->user = $decoded->data;
+        } catch (\Firebase\JWT\ExpiredException $e) {
+            return service('response')->setJSON([
+                'message' => 'Unauthorized: Access token expired'
+            ])->setStatusCode(401);
         } catch (\Exception $e) {
             return service('response')->setJSON([
                 'message' => 'Unauthorized: ' . $e->getMessage()

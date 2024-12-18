@@ -42,10 +42,14 @@ $routes->group('api', ['namespace' => 'App\Controllers', 'filter' => 'jwtAuth'],
     // $routes->get('transactions', 'TransactionsController::index');
     // $routes->post('transactions', 'TransactionsController::create'); 
     // $routes->get('transactions/(:num)', 'TransactionsController::show/$1');
-
 });
 
-// Routes for Auth (no authentication needed)
-$routes->post('auth/login', 'AuthController::login');
-$routes->post('auth/register', 'AuthController::create');
+// Routes for Auth
+$routes->group('auth', ['namespace' => 'App\Controllers'], function ($routes) {
+    $routes->post('login', 'AuthController::login');
+    $routes->post('register', 'AuthController::create');
+    $routes->post('refresh-token', 'AuthController::refreshToken');
+    $routes->post('logout', 'AuthController::logout');
+});
+
 $routes->options('(:any)', 'Preflight::options');

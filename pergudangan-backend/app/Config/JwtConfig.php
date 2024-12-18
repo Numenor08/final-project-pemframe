@@ -23,6 +23,11 @@ class JwtConfig
         return time() + 60 * 120; // 2 jam dari waktu sekarang
     }
 
+    public static function getRefreshExpirationTime()
+    {
+        return time() + 60 * 60 * 24 * 7; // 7 hari dari waktu sekarang
+    }
+
     public static function getIssuer()
     {
         return 'localhost';
