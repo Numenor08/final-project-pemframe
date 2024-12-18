@@ -1,0 +1,27 @@
+Main url: localhost:8080
+Routes api:
+GET api/items
+POST api/items
+GET api/items/{num}
+PUT api/items/{num}
+DELETE api/items/{num}
+
+GET api/categories
+POST api/categories
+PUT api/categories/{num}
+DELETE api/categories/{num}
+
+GET api/suppliers
+POST api/suppliers
+GET api/suppliers/{num}
+PUT api/suppliers/{num}
+DELETE api/suppliers/{num}
+
+GET api/stocks
+POST api/stocks
+GET api/stocks/{num}
+PUT api/stocks/{num}
+
+GET api/transactions
+POST api/transactions
+GET api/transactions/{num}
