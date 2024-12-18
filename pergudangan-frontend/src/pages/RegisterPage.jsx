@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@shadcn/ui/button';
 import { Input } from '@shadcn/ui/input';
+import axios from "axios";
 
 const RegisterPage = () => {
     const navigate = useNavigate();
@@ -26,18 +27,16 @@ const RegisterPage = () => {
         }
 
         try {
-            const response = await fetch('http://localhost:8080/auth/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ username, password, role }),
+            const response = await axios.post('http://localhost:8080/auth/register', {
+                username,
+                password,
+                role
             });
 
             const data = await response.json();
 
             if (response.ok) {
-                navigate('/login', { replace: true });
+                navigate('/', { replace: true });
             } else {
                 setErrorMessage(data.message || 'Gagal mendaftar, coba lagi.');
             }

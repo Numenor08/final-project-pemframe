@@ -4,8 +4,8 @@ import { AuthContext } from '@/context/AuthContext';
 
 const ProtectedRoute = () => {
     const { token } = useContext(AuthContext);
-    if (!token) {
-        return <Navigate to="/" replace />;
+    if (token) {
+        return <Navigate to="/dashboard" replace />;
     }
 
     return <Outlet />;

@@ -7,13 +7,16 @@ import Categories from "@/components/Categories";
 import Suppliers from "@/components/Suppliers";
 import Transactions from "@/components/Transactions";
 import ItemsList from "@/components/ItemsList";
+import LoginPass from "@/components/LoginPass"
 
 const AppRoutes = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LoginPage />} /> {/* Use IndexPage if you have one */}
-        <Route path="/register" element={<RegisterPage />} />
+        <Route element={<LoginPass />}>
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+        </Route>
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard/*" element={<Dashboard />}>
             <Route path="" element={<ItemsList />} />

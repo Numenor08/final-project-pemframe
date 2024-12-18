@@ -1,21 +1,12 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { Button } from '@shadcn/ui/button';
 import { Input } from '@shadcn/ui/input';
 import axios from 'axios';
 
 const LoginPage = () => {
-    const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            navigate('/dashboard', { replace: true });
-        }
-    }, [navigate]);
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -35,7 +26,7 @@ const LoginPage = () => {
 
             if (response.status === 200) {
                 localStorage.setItem('token', data.token);
-                navigate('/dashboard', { replace: true });
+                window.location.reload();
             } else {
                 setErrorMessage(data.message || 'Login gagal, coba lagi.');
             }
