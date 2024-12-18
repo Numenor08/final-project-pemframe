@@ -7,5 +7,5 @@ class ItemModel extends Model
 {
     protected $table = 'items';
     protected $primaryKey = 'item_id';
-    protected $allowedFields = ['name', 'category_id', 'supplier_id', 'unit_price', 'created_at'];
+    protected $allowedFields = ['name', 'quantity', 'category_id', 'supplier_id', 'unit_price', 'created_at'];
 }

@@ -1,6 +1,5 @@
-// src/pages/LoginPage.js
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Gunakan useNavigate untuk navigasi
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@shadcn/ui/button';
 import { Input } from '@shadcn/ui/input';
 import axios from 'axios';
@@ -11,17 +10,22 @@ const LoginPage = () => {
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            navigate('/dashboard', { replace: true });
+        }
+    }, [navigate]);
+
     const handleLogin = async (e) => {
         e.preventDefault();
 
-        // Validasi input
         if (!username || !password) {
             setErrorMessage('Username dan password tidak boleh kosong.');
             return;
         }
 
         try {
-            // Kirim permintaan login ke backend
             const response = await axios.post('http://localhost:8080/auth/login', {
                 username,
                 password,
@@ -30,12 +34,9 @@ const LoginPage = () => {
             const data = response.data;
 
             if (response.status === 200) {
-                // Jika login berhasil, simpan token ke localStorage
                 localStorage.setItem('token', data.token);
-                // Arahkan ke dashboard
-                navigate('/dashboard');
+                navigate('/dashboard', { replace: true });
             } else {
-                // Jika ada error, tampilkan pesan kesalahan
                 setErrorMessage(data.message || 'Login gagal, coba lagi.');
             }
         } catch (error) {
@@ -43,12 +44,6 @@ const LoginPage = () => {
             setErrorMessage('Terjadi kesalahan, silakan coba lagi.');
         }
     };
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            navigate('/dashboard');
-        }
-    }, [navigate]);
 
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-100">

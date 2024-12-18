@@ -17,11 +17,12 @@ GET api/suppliers/{num}
 PUT api/suppliers/{num}
 DELETE api/suppliers/{num}
 
+GET api/transactions
+POST api/transactions
+GET api/transactions/{num}
+
+// Unused
 GET api/stocks
 POST api/stocks
 GET api/stocks/{num}
 PUT api/stocks/{num}
-
-GET api/transactions
-POST api/transactions
-GET api/transactions/{num}

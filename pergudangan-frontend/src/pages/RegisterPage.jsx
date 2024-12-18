@@ -1,6 +1,5 @@
-// src/pages/RegisterPage.js
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Untuk navigasi setelah berhasil register
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@shadcn/ui/button';
 import { Input } from '@shadcn/ui/input';
 
@@ -8,27 +7,25 @@ const RegisterPage = () => {
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [role, setRole] = useState('admin'); // Default role adalah admin
+    const [role, setRole] = useState('admin');
     const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
-            navigate('/dashboard');
+            navigate('/dashboard', { replace: true });
         }
     }, [navigate]);
 
     const handleRegister = async (e) => {
         e.preventDefault();
 
-        // Validasi input
         if (!username || !password) {
             setErrorMessage('Username dan password tidak boleh kosong.');
             return;
         }
 
         try {
-            // Kirim permintaan register ke backend
             const response = await fetch('http://localhost:8080/auth/register', {
                 method: 'POST',
                 headers: {
@@ -40,10 +37,8 @@ const RegisterPage = () => {
             const data = await response.json();
 
             if (response.ok) {
-                // Jika register berhasil, arahkan ke login
-                navigate('/login');
+                navigate('/login', { replace: true });
             } else {
-                // Jika ada error, tampilkan pesan kesalahan
                 setErrorMessage(data.message || 'Gagal mendaftar, coba lagi.');
             }
         } catch (error) {
